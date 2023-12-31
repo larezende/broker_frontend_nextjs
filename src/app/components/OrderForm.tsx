@@ -1,4 +1,5 @@
 import { revalidateTag } from 'next/cache';
+import { Button, Label, TextInput } from 'flowbite-react';
 
 async function initTransaction(formData: FormData) {
   'use server';
@@ -38,18 +39,48 @@ async function initTransaction(formData: FormData) {
 export function OrderForm(params: {
   asset_id: string,
   wallet_id: string,
+  type: 'BUY' | 'SELL',
 }) {
   return (
     <div>
+      <h1>Order Form</h1>
       <form action={initTransaction}>
         <input name='asset_id' type='hidden' defaultValue={params.asset_id} />
         <input name='wallet_id' type='hidden' defaultValue={params.wallet_id} />
         <input name='type' type='hidden' defaultValue={'BUY'} />
-        <input name='shares' type='number' min={1} step={1} placeholder='quantidade' />
+        <div>
+          <div className='mb-2 block'>
+            <Label htmlFor='shares' value='Quantity' />
+          </div>
+          <TextInput
+            id='shares'
+            name='shares'
+            required
+            type='number'
+            min={1}
+            step={1}
+            defaultValue={1}
+          />
+        </div>
         <br />
-        <input name='price' type='number' min={1} step={0.01} placeholder='preço' />
+        <div>
+          <div className='mb-2 block'>
+            <Label htmlFor='price' value='Price $' />
+          </div>
+          <TextInput
+            id='price'
+            name='price'
+            required
+            type='number'
+            min={.01}
+            step={.01}
+            defaultValue={1}
+          />
+        </div>
         <br />
-        <button>Comprar</button>
+        <Button type='submit' color={params.type === 'BUY' ? 'success' : 'failure'}>
+          Confirm {params.type === 'BUY' ? 'purchase' : 'sale'}
+        </Button>
       </form>
     </div>
   );
