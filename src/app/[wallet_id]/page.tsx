@@ -4,9 +4,11 @@ export default async function HomePage({ params }: {
   params: { wallet_id: string }
 }) {
   return (
-    <div>
-      <h1>Meus Investimentos</h1>
+    <main className='container mx-auto px-2'>
+      <article className='format format-invert'>
+        <h1>My Investments</h1>
+      </article>
       <MyWallet wallet_id={params.wallet_id} />
-    </div>
+    </main>
   );
 }

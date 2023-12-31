@@ -3,3 +3,4 @@
 * React Server Components
 * REST
 * Tailwind CSS
+* Flowbite
